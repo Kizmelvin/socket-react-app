@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# Real-time Notification System with Socket.IO and ReactJS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![real-time notification](image.png)
 
-## Available Scripts
+This repository contains the source code for a real-time notification system built with Socket.IO and ReactJS. This system allows users to join chat rooms and receive instant notifications about new messages and user activity. Additionally, administrators can receive email alerts whenever a new user joins a room.
 
-In the project directory, you can run:
+## Prerequisites
 
-### `npm start`
+- Node.js installed on your machine
+- Basic understanding of ReactJS and Socket.IO
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Users can join chat rooms.
+Users can send and receive messages in real-time.
+Users receive a notification when a new user joins the room. (Alert box)
+Administrators receive email notifications (via Novu) when a new user joins the room.
 
-### `npm test`
+## Technology Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Frontend: ReactJS
+Backend: Node.js, Express
+Real-time communication: Socket.IO
+Email notifications: Novu
 
-### `npm run build`
+## Project Structure
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+`server`: Contains the backend code for the application.
+`client`: Contains the React frontend code for the application.
+`.env`: (Optional) Stores the Novu secret key for email notifications.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## How it Works
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Users connect to the backend server using Socket.IO.
 
-### `npm run eject`
+Users can join chat rooms by providing a username and room name.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+When a user joins a room, the server broadcasts a notification to all other users in the same room.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+When a user sends a message, the server broadcasts the message to all users in the same room.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Users receive messages and notifications in real-time through Socket.IO listeners.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+(Optional) When a user joins a room, the server triggers a Novu workflow that sends an email notification to the users.
 
-## Learn More
+## Customization
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+You can customize the email notification content and recipient email address in the server/index.js file.
+You can further enhance the user interface and functionalities of the chat application.
+Further Resources
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Socket.IO: https://socket.io/docs/v4/
+ReactJS: https://legacy.reactjs.org/docs/getting-started.html
+Novu: https://novu.co/
