@@ -5,8 +5,9 @@ require("dotenv").config();
 const { Server } = require("socket.io");
 const { Novu } = require("@novu/node");
 
-const novu = new Novu(process.env.NOVU_SECRET_KEY);
-
+// const novu = new Novu(process.env.NOVU_SECRET_KEY);
+// 48de1b3675395d9f9f229ab2660e2060
+const novu = new Novu("48de1b3675395d9f9f229ab2660e2060");
 const app = express();
 app.use(cors());
 
@@ -26,10 +27,10 @@ const notification = (data) => {
   novu.trigger("demo-recent-login", {
     to: {
       subscriberId: "66be2642d3f9eb69fff3f2ca",
-      email: "chidiebere.johnbosco@gmail.com",
+      email: data.email,
     },
     payload: {
-      header: `Hi there! ${data.username} just joined room ${data.room}`,
+      header: `Hi ${data.sender} you have an active chat at room ${data.room} login to continue chatting`,
       loginDate: JSON.parse(JSON.stringify(time)),
       loginLocation: "Unknown",
       userFirstName: data.username,
@@ -43,9 +44,11 @@ io.on("connection", (socket) => {
   socket.on("join_room", (data) => {
     socket.join(data.room);
     socket.to(data.room).emit("user_joined", data);
-    notification(data);
   });
 
+  socket.on("notify-user", (data) => {
+    notification(data);
+  });
   socket.on("send_message", (data) => {
     // console.log(data);
     socket.to(data.room).emit("recieve_message", data);
