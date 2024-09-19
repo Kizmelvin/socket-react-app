@@ -5,9 +5,8 @@ require("dotenv").config();
 const { Server } = require("socket.io");
 const { Novu } = require("@novu/node");
 
-// const novu = new Novu(process.env.NOVU_SECRET_KEY);
-// 48de1b3675395d9f9f229ab2660e2060
-const novu = new Novu("48de1b3675395d9f9f229ab2660e2060");
+const novu = new Novu(process.env.NOVU_SECRET_KEY);
+
 const app = express();
 app.use(cors());
 
